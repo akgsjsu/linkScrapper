@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="stylesheet" href="../static/style.css">
+    <title>Link Scrapper</title>
+</head>
+
+<body style="
+    background-image: url('../static/background1.png');
+    height: 100vh;">
+    <header>
+        <!-- Navbar -->
+        <ul class="nav nav-tabs bg-light">
+          <li class="nav-item">
+            <a class="nav-link text-dark active" aria-current="page" href="/">Home</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link text-info" href="/about">About</a>
+          </li>
+        </ul>
+    </header>
+
+    <div class="container d-flex flex-column justify-content-center align-items-center rounded bg-light" >
+        <h4 class="lead">Find all the links contained in a web page</h4>
+
+       <form method="post">
+          <div class="row form-group">
+              <div class="col-sm-4 col-lg-4 col-md-4">
+                <label for="url">Enter URL</label>
+              </div>
+              <div class="col-sm-4 col-lg-4 col-md-4">
+                <input type="text" id="url" name='url' placeholder="www.example.com" required>
+              </div>
+          </div>
+           <div class="row justify-content-center">
+                  <button type="submit" class="btn btn-info">Submit</button>
+           </div>
+       </form>
+
+    </div>
+</body>
+</html>

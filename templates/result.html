@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Links on Webpage</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../static/style.css">
+
+</head>
+
+
+
+<body class="img-responsive" style="
+    background-image: url('../static/background1.png');
+    ">
+    <header>
+      <!-- Navbar -->
+        <ul class="nav nav-tabs bg-light">
+          <li class="nav-item">
+            <a class="nav-link text-dark active" aria-current="page" href="/">Home</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link text-info" href="/about">About</a>
+          </li>
+        </ul>
+    </header>
+    <div class="container-table">
+        <div class="table-container">
+            <table class="table-light fixed-width-table">
+                <thead class="thead bg-light">
+                    <tr>
+                        <th scope="col" class="index">#</th>
+                        <th scope="col" class="table-content">URL</th>
+                        <th scope="col" class="table-content">Links</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% set index = 0 %}
+                    {% for url, links in links_in_url.items() %}
+                        {% for link in links %}
+                        <tr>
+                            <td class="index">{{ index + loop.index }}</td>
+                            <td class="table-content">{{ url }}</td>
+                            <td class="table-content"><a href="{{ link }}">{{ link }}</a></td>
+                        </tr>
+                        {% endfor %}
+                        {% set index = index + links|length %}
+                    {% endfor %}
+                </tbody>
+            </table>
+            <div id="page-selection"></div>
+        </div>
+    </div>
+
+
+    <!-- Add jQuery and bootpag libraries -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootpag/1.0.7/jquery.bootpag.min.js"></script>
+
+    <script>
+        $(document).ready(function () {
+            // Function to update the table content based on the selected page number
+            function updateTableContent(pageNum) {
+                // Calculate the starting and ending index of the current page
+                var itemsPerPage = 10; // Number of items to display per page
+                var startIndex = (pageNum - 1) * itemsPerPage;
+                var endIndex = startIndex + itemsPerPage;
+
+                // Hide all table rows
+                $(".table-light tbody tr").hide();
+
+                // Show the table rows for the current page
+                $(".table-light tbody tr").slice(startIndex, endIndex).show();
+            }
+
+            // Initialize the bootpag pagination control
+            $('#page-selection').bootpag({
+                total: Math.ceil($(".table-light tbody tr").length / 10), // Total number of pages
+                page: 1, // Start with the first page
+                maxVisible: 5 // Maximum number of visible page numbers
+            }).on('page', function (event, num) {
+                updateTableContent(num); // Update the table content when a page number is clicked
+            });
+
+            // Show the first page on initial page load
+            updateTableContent(1);
+        });
+    </script>
+
+</body>
+
+</html>
